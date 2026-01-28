@@ -1,0 +1,510 @@
+#envelope {
+  margin: 150px;
+  position: relative;
+  width: 280px;
+  height: 180px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  top: 150px;
+  background-color: #f9c5c8;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.front {
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: 3;
+}
+
+.flap {
+  border-left: 140px solid transparent;
+  border-right: 140px solid transparent;
+  border-bottom: 82px solid transparent;
+  /* a little smaller */
+  border-top: 98px solid #ff3333;
+  /* a little larger */
+  transform-origin: top;
+  pointer-events: none;
+}
+
+.pocket {
+  border-left: 140px solid #ff9999;
+  border-right: 140px solid #ff9999;
+  border-bottom: 90px solid #fd8787;
+  border-top: 90px solid transparent;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.letter {
+  position: relative;
+  background-color: #f9c5c8;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 90%;
+  top: 5%;
+  border-radius: 6px;
+  box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
+}
+
+.letter:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 25%, rgba(239, 215, 239, 0.7) 55%, #eed7ef 100%);
+}
+
+.words {
+  position: absolute;
+  left: 10%;
+  width: 80%;
+  height: 14%;
+  background-color: #fdb7ba;
+}
+
+.words.line1 {
+  top: 15%;
+  width: 20%;
+  height: 7%;
+}
+
+.words.line2 {
+  top: 30%;
+}
+
+.words.line3 {
+  top: 50%;
+}
+
+.words.line4 {
+  top: 70%;
+}
+
+.open .flap {
+  transform: rotateX(180deg);
+  transition: transform 0.4s ease, z-index 0.6s;
+  z-index: 1;
+}
+
+.close .flap {
+  transform: rotateX(0deg);
+  transition: transform 0.4s 0.6s ease, z-index 1s;
+  z-index: 5;
+}
+
+.close .letter {
+  transform: translateY(0px);
+  transition: transform 0.4s ease, z-index 1s;
+  z-index: 1;
+}
+
+.open .letter {
+  transform: translateY(-60px);
+  transition: transform 0.4s 0.6s ease, z-index 0.6s;
+  z-index: 2;
+}
+
+.hearts {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.heart {
+  position: absolute;
+  bottom: 0;
+  right: 10%;
+  pointer-events: none;
+}
+
+.heart:before,
+.heart:after {
+  position: absolute;
+  content: "";
+  left: 50px;
+  top: 0;
+  width: 50px;
+  height: 80px;
+  background: #D00000;
+  border-radius: 50px 50px 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+  pointer-events: none;
+}
+
+.heart:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+.close .heart {
+  opacity: 0;
+  -webkit-animation: none;
+          animation: none;
+}
+
+.a1 {
+  left: 20%;
+  transform: scale(0.6);
+  opacity: 1;
+  -webkit-animation: slideUp 4s linear 1, sideSway 2s ease-in-out 4 alternate;
+  -moz-animation: slideUp 4s linear 1, sideSway 2s ease-in-out 4 alternate;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.7s;
+          animation-delay: 0.7s;
+}
+
+.a2 {
+  left: 55%;
+  transform: scale(1);
+  opacity: 1;
+  -webkit-animation: slideUp 5s linear 1, sideSway 4s ease-in-out 2 alternate;
+  -moz-animation: slideUp 5s linear 1, sideSway 4s ease-in-out 2 alternate;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.7s;
+          animation-delay: 0.7s;
+}
+
+.a3 {
+  left: 10%;
+  transform: scale(0.8);
+  opacity: 1;
+  -webkit-animation: slideUp 7s linear 1, sideSway 2s ease-in-out 6 alternate;
+  -moz-animation: slideUp 7s linear 1, sideSway 2s ease-in-out 6 alternate;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.7s;
+          animation-delay: 0.7s;
+}
+
+@-webkit-keyframes slideUp {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -600px;
+  }
+}
+@keyframes slideUp {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -600px;
+  }
+}
+@-webkit-keyframes sideSway {
+  0% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 50px;
+  }
+}
+@keyframes sideSway {
+  0% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 50px;
+  }
+}
+body {
+  background-color: #f7d9da;
+}
+
+.envlope-wrapper {
+  height: 380px;
+}
+
+.reset {
+  text-align: center;
+}
+
+.reset button {
+  font-weight: 800;
+  font-style: normal;
+  transition: all 0.1s linear;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: solid 2px #ff5757;
+  border-radius: 4px;
+  color: #ff5757;
+  display: inline-block;
+  font-size: 14px;
+  text-transform: uppercase;
+  margin: 5px;
+  padding: 10px;
+  line-height: 1em;
+  text-decoration: none;
+  min-width: 120px;
+  cursor: pointer;
+}
+
+.reset button:hover {
+  background-color: #fc9d9d;
+  color: #a10000;
+}
+/* --- ESTILOS PARA LA ESCENA 2 --- */
+.hidden {
+    display: none !important;
+}
+
+#escena-2 {
+    display: none; /* Se activará con JS */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://img.freepik.com/vector-gratis/tema-san-valentin-corazones-cielo-rosa_1308-38030.jpg?semt=ais_hybrid&w=740') no-repeat center center;
+    background-size: cover;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    overflow: hidden;
+    z-index: 999;
+}
+
+/* Agrega aquí las clases .message, .bubble y @keyframes que estaban en Love You ❤️.html */
+.message {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 10;
+    margin-top: 20vh;
+}
+
+.bubble {
+    position: absolute;
+    background: rgba(255, 182, 193, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    white-space: nowrap;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    animation: floatUp 8s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+
+.history-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #ff5757;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 87, 87, 0.4);
+    transition: transform 0.2s, background-color 0.2s;
+    font-family: inherit;
+}
+
+.history-btn:hover {
+    background-color: #ff3333;
+    transform: scale(1.05);
+}
+
+.history-btn:active {
+    transform: scale(0.95);
+}
+
+/* --- ESTILOS PARA LA ESCENA 3 (LÍNEA DE TIEMPO) --- */
+#escena-3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff0f3; /* Fondo suave */
+    overflow-y: auto; /* Permite hacer scroll si hay muchas fotos */
+    z-index: 2000;
+    padding-bottom: 50px;
+}
+
+.timeline-header {
+    text-align: center;
+    padding: 20px;
+    background-color: #ff5757;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#btn-volver {
+    background: white;
+    color: #ff5757;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.timeline-container {
+    max-width: 600px;
+    margin: 40px auto;
+    position: relative;
+    padding: 0 20px;
+}
+
+/* La línea vertical */
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: #ff9999;
+    top: 0;
+    bottom: 0;
+    left: 30px; /* Posición de la línea */
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    padding-left: 60px; /* Espacio para no tapar la línea */
+}
+
+.timeline-icon {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border: 3px solid #ff5757;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 35px;
+    font-size: 20px;
+    z-index: 10;
+}
+
+.timeline-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.timeline-content img {
+    width: 100%;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.date {
+    display: inline-block;
+    background: #ffe0e0;
+    color: #d00000;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* Animación de entrada */
+.mostrar-timeline .timeline-item {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+/* Asegúrate de tener estas líneas para que todos bailen al entrar */
+.timeline-item:nth-child(1) { animation-delay: 0.2s; }
+.timeline-item:nth-child(2) { animation-delay: 0.4s; }
+.timeline-item:nth-child(3) { animation-delay: 0.6s; }
+.timeline-item:nth-child(4) { animation-delay: 0.8s; }
+.timeline-item:nth-child(5) { animation-delay: 1.0s; } /* Nuevo */
+.timeline-item:nth-child(6) { animation-delay: 1.2s; } /* Nuevo */
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- ESTILOS DEL CARRUSEL --- */
+.carousel {
+    position: relative;
+    width: 100%;
+    margin: 15px 0;
+    overflow: hidden; /* Para mantener todo ordenado */
+    border-radius: 8px;
+}
+
+.carousel img {
+    width: 100%;
+    display: none; /* Ocultamos todas por defecto */
+    border-radius: 8px;
+    transition: opacity 0.5s ease;
+}
+
+/* Solo mostramos la que tenga la clase active */
+.carousel img.active {
+    display: block;
+    animation: fadeEffect 0.8s;
+}
+
+/* Animación suave de desvanecimiento */
+@keyframes fadeEffect {
+    from {opacity: 0.4;}
+    to {opacity: 1;}
+}
+
+/* Contenedor de los puntitos */
+.carousel-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+    /* Fondo degradado suave para que se vean los puntos si la foto es clara */
+    background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+    padding-bottom: 5px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* Los puntitos */
+.dot {
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: 0 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active, .dot:hover {
+    background-color: #ff5757; /* Color activo (rojo) */
+    transform: scale(1.2); /* Un poquito más grande */
+}
