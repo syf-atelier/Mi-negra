@@ -275,6 +275,9 @@ body {
     text-align: center;
     overflow: hidden;
     z-index: 999;
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll; /* Scroll funciona mejor en móviles que Fixed */
 }
 
 /* Agrega aquí las clases .message, .bubble y @keyframes que estaban en Love You ❤️.html */
@@ -536,4 +539,72 @@ body {
 .dot.active, .dot:hover {
     background-color: #ff5757; /* Color activo (rojo) */
     transform: scale(1.2); /* Un poquito más grande */
+}
+
+/* --- OPTIMIZACIÓN PARA MÓVILES (Pega esto al final de tu CSS) --- */
+@media screen and (max-width: 600px) {
+    
+    /* 1. Ajustar el sobre para que no quede muy abajo */
+    #envelope {
+        margin-top: 50px; /* Reducimos el margen superior */
+        margin-bottom: 50px;
+        transform: scale(0.8); /* Lo hacemos un poquito más chico si la pantalla es muy angosta */
+    }
+    
+    .envlope-wrapper {
+        height: 300px; /* Reducimos la altura del contenedor */
+    }
+
+    /* 2. Textos más legibles y ajustados */
+    .message {
+        width: 90%; /* Que ocupe casi todo el ancho */
+        margin-top: 10vh; /* Subimos un poco el mensaje */
+        padding: 15px;
+    }
+    
+    .message h1 {
+        font-size: 1.5em; /* Título un poco más chico */
+    }
+
+    /* 3. Ajustes de la Línea de Tiempo (Timeline) */
+    .timeline-container {
+        padding: 0 10px; /* Menos margen a los lados */
+    }
+    
+    .timeline-container::after {
+        left: 20px; /* Movemos la línea vertical más a la izquierda */
+    }
+    
+    .timeline-item {
+        padding-left: 45px; /* Acercamos el contenido a la línea */
+        margin-bottom: 30px;
+    }
+    
+    .timeline-icon {
+        left: 0px; /* Icono pegado a la izquierda */
+        width: 35px; /* Iconos un poco más chicos */
+        height: 35px;
+        line-height: 30px;
+        font-size: 18px;
+    }
+    
+    /* 4. Carrusel y Botones Táctiles */
+    .dot {
+        width: 15px; /* Puntos más grandes para el dedo */
+        height: 15px;
+        margin: 0 8px; /* Más separados entre sí */
+    }
+
+    .history-btn, #btn-volver {
+        padding: 15px 30px; /* Botones más grandes para facilitar el toque */
+        font-size: 1.2em;
+        width: 80%; /* Botones anchos */
+    }
+    
+    /* 5. Ajustar Burbujas para que no tapen el texto */
+    .text-bubble {
+        font-size: 14px;
+        padding: 5px 10px;
+        opacity: 0.8; /* Un poco más transparentes */
+    }
 }

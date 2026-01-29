@@ -67,35 +67,74 @@ $(document).ready(function() {
         }, 500);
     }
     
-    // --- LÓGICA DEL CARRUSEL (FOTOS Y VIDEOS) ---
+    // --- LÓGICA DEL CARRUSEL (FOTOS, VIDEOS Y SWIPE TÁCTIL) ---
     $(".carousel").each(function() {
         var $carousel = $(this);
-        
-        // CAMBIO IMPORTANTE: Ahora buscamos "img" Y "video"
         var $mediaItems = $carousel.find("img, video");
+        var $dotsContainer = $('<div class="carousel-dots"></div>');
         
+        // Variables para el control táctil
+        var touchStartX = 0;
+        var touchEndX = 0;
+
         if ($mediaItems.length > 1) {
-            var $dotsContainer = $('<div class="carousel-dots"></div>');
             
+            // 1. CREAR LOS PUNTITOS
             $mediaItems.each(function(index) {
                 var $dot = $('<span class="dot"></span>');
                 if (index === 0) $dot.addClass("active");
-                
-                $dot.click(function() {
-                    // Detener videos anteriores si se estaban reproduciendo
-                    $("video").each(function() { this.pause(); });
 
-                    $carousel.find(".dot").removeClass("active");
-                    $mediaItems.removeClass("active");
-                    
-                    $(this).addClass("active");
-                    $($mediaItems[index]).addClass("active");
+                // Evento Clic en el punto
+                $dot.click(function() {
+                    cambiarDiapositiva(index);
                 });
                 
                 $dotsContainer.append($dot);
             });
-            
             $carousel.append($dotsContainer);
+
+            // 2. FUNCIÓN PARA CAMBIAR DE DIAPOSITIVA
+            function cambiarDiapositiva(newIndex) {
+                // Pausar videos antes de cambiar
+                $("video").each(function() { this.pause(); });
+
+                // Actualizar clases visuales
+                $carousel.find(".dot").removeClass("active");
+                $mediaItems.removeClass("active");
+
+                // Activar el nuevo
+                $($carousel.find(".dot")[newIndex]).addClass("active");
+                $($mediaItems[newIndex]).addClass("active");
+            }
+
+            // 3. LÓGICA DE SWIPE (DESLIZAR)
+            $carousel.on('touchstart', function(event) {
+                touchStartX = event.originalEvent.changedTouches[0].screenX;
+            });
+
+            $carousel.on('touchend', function(event) {
+                touchEndX = event.originalEvent.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                // Obtenemos el índice de la foto actual
+                var currentIndex = $mediaItems.filter(".active").index();
+                
+                // Detectar Swipe a la IZQUIERDA (Siguiente)
+                if (touchEndX < touchStartX - 50) {
+                    var nextIndex = currentIndex + 1;
+                    if (nextIndex >= $mediaItems.length) nextIndex = 0; // Volver al inicio
+                    cambiarDiapositiva(nextIndex);
+                }
+                
+                // Detectar Swipe a la DERECHA (Anterior)
+                if (touchEndX > touchStartX + 50) {
+                    var prevIndex = currentIndex - 1;
+                    if (prevIndex < 0) prevIndex = $mediaItems.length - 1; // Ir al final
+                    cambiarDiapositiva(prevIndex);
+                }
+            }
         }
     });
 
