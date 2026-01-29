@@ -299,12 +299,38 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     animation: floatUp 8s linear infinite;
 }
+/* Contenedor de las burbujas */
+#bubbles-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1; 
+}
 
-@keyframes floatUp {
-    0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+/* Las burbujas individuales */
+.text-bubble {
+    position: absolute;
+    font-size: 18px;
+    font-family: 'Cursive', sans-serif;
+    color: #d63384;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    opacity: 0; /* Empiezan invisibles */
+    animation: floatText 8s ease-in-out forwards;
+}
+
+/* La animación de flotar hacia arriba */
+@keyframes floatText {
+    0% { opacity: 0; transform: translateY(0) scale(0.5); }
     10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    100% { opacity: 0; transform: translateY(-100vh) scale(1); }
 }
 
 .history-btn {
@@ -458,19 +484,22 @@ body {
     border-radius: 8px;
 }
 
-.carousel img {
+.carousel img, .carousel video {
     width: 100%;
-    display: none; /* Ocultamos todas por defecto */
+    display: none;
     border-radius: 8px;
     transition: opacity 0.5s ease;
+    /* Ajuste para que el video no se salga */
+    max-height: 500px; 
+    object-fit: contain; 
+    background: black; /* Fondo negro para videos verticales */
 }
 
 /* Solo mostramos la que tenga la clase active */
-.carousel img.active {
+.carousel img.active, .carousel video.active {
     display: block;
     animation: fadeEffect 0.8s;
 }
-
 /* Animación suave de desvanecimiento */
 @keyframes fadeEffect {
     from {opacity: 0.4;}

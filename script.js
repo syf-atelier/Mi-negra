@@ -22,69 +22,74 @@ $(document).ready(function() {
     function close() {
         envelope.addClass("close").removeClass("open");
     }
-    $(document).ready(function() {
-    // ... (Tu código anterior) ...
 
-    // Al hacer clic en "Nuestra historia..."
+    // --- BOTÓN PARA IR A LA ESCENA 3 (HISTORIA) ---
     $("#btn-historia").click(function() {
-        // Ocultamos la escena 2 (burbujas)
+        // Ocultamos la escena 2
         $("#escena-2").fadeOut(500, function() {
-            // Mostramos la escena 3 (timeline)
-            $("#escena-3").removeClass("hidden").fadeIn();
-            // Agregamos una clase para activar animaciones si quieres
+            // Mostramos la escena 3 y forzamos su visualización
+            $("#escena-3").removeClass("hidden").css("display", "block").hide().fadeIn(1000);
             $("#escena-3").addClass("mostrar-timeline");
-            /* Asegúrate de tener estas líneas para que todos bailen al entrar */
         });
     });
 
-    // Botón para reiniciar todo (opcional, por si quieren verlo de nuevo)
-    $("#btn-volver").click(function() {
-        $("#escena-3").fadeOut(500, function() {
-            // Recargamos la página para reiniciar la carta
-            location.reload(); 
-        });
-    });
-});
-    // Función extraída de Love You ❤️.html
+   // --- LÓGICA DE LA LLUVIA DE MENSAJES (CORREGIDA) ---
     function iniciarBurbujas() {
-        const phrases = ["Te amo ❤️", "Eres increíble ✨", "Siempre juntos 💖", "Mi lugar favorito eres tú ❤️‍🩹", "Me encantas ❣️", "Me enloqueces 🥰", "Tan linda e inteligente 😍", "Eres la mejor 🥺", "Lo vales todo mami 💫"];
+        const messages = [
+            "Te amo muchísimo ❤️", "Gracias por estar en mi vida 🌟", "Me enloqueces 🥰",
+            "Eres mi persona favorita 💕", "Juntos por siempre 🥰", "Tan linda e inteligente 😍",
+            "Tú y yo, para siempre 💖", "Tu sonrisa me ilumina 💫", "Lo vales todo mami 💫",
+            "Eres lo mejor que me ha pasado 😍", "Cada momento contigo es mágico ✨",
+            "Siempre pienso en ti 💭", "Mi corazón es tuyo 💘"
+        ];
+
         setInterval(() => {
-            const bubble = document.createElement("div");
-            bubble.className = "bubble";
-            bubble.innerText = phrases[Math.floor(Math.random() * phrases.length)];
-            bubble.style.left = Math.random() * 90 + "vw";
-            bubble.style.animationDuration = (Math.random() * 3 + 5) + "s";
-            document.getElementById("bubble-container").appendChild(bubble);
-            setTimeout(() => bubble.remove(), 8000);
+            // Solo creamos burbujas si la escena 2 es visible
+            if ($("#escena-2").is(":visible")) {
+                const bubble = document.createElement("div");
+                bubble.className = "text-bubble"; // Usamos la clase del CSS original
+                
+                // Usamos la variable correcta 'messages'
+                bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
+
+                // Posición aleatoria simple (sin cálculos complejos que fallan)
+                bubble.style.left = Math.random() * 80 + 10 + "vw"; 
+                bubble.style.top = Math.random() * 80 + 10 + "vh";
+
+                // Añadimos al ID correcto
+                const container = document.getElementById("bubbles-text");
+                if (container) {
+                    container.appendChild(bubble);
+                    // Eliminar después de 8s
+                    setTimeout(() => bubble.remove(), 8000);
+                }
+            }
         }, 500);
     }
-    // --- LÓGICA DEL CARRUSEL AUTOMÁTICO ---
     
-    // Recorremos cada carrusel que exista en la página
+    // --- LÓGICA DEL CARRUSEL (FOTOS Y VIDEOS) ---
     $(".carousel").each(function() {
         var $carousel = $(this);
-        var $images = $carousel.find("img");
         
-        // Si hay más de una foto, creamos los puntitos
-        if ($images.length > 1) {
+        // CAMBIO IMPORTANTE: Ahora buscamos "img" Y "video"
+        var $mediaItems = $carousel.find("img, video");
+        
+        if ($mediaItems.length > 1) {
             var $dotsContainer = $('<div class="carousel-dots"></div>');
             
-            // Por cada foto, creamos un punto
-            $images.each(function(index) {
+            $mediaItems.each(function(index) {
                 var $dot = $('<span class="dot"></span>');
-                
-                // Si es la primera foto, activamos el primer punto
                 if (index === 0) $dot.addClass("active");
                 
-                // Al hacer clic en el punto
                 $dot.click(function() {
-                    // Quitamos la clase active de todos los puntos y fotos de ESTE carrusel
+                    // Detener videos anteriores si se estaban reproduciendo
+                    $("video").each(function() { this.pause(); });
+
                     $carousel.find(".dot").removeClass("active");
-                    $images.removeClass("active");
+                    $mediaItems.removeClass("active");
                     
-                    // Activamos el punto clicado y la foto correspondiente
                     $(this).addClass("active");
-                    $($images[index]).addClass("active");
+                    $($mediaItems[index]).addClass("active");
                 });
                 
                 $dotsContainer.append($dot);
@@ -92,5 +97,10 @@ $(document).ready(function() {
             
             $carousel.append($dotsContainer);
         }
+    });
+
+    // Botón volver (opcional)
+    $("#btn-volver").click(function() {
+        location.reload();
     });
 });
