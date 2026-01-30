@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@400;600&display=swap');
 #envelope {
   margin: 150px;
   position: relative;
@@ -281,14 +282,45 @@ body {
 }
 
 /* Agrega aquí las clases .message, .bubble y @keyframes que estaban en Love You ❤️.html */
+/* --- ESTILO MEJORADO DEL RECUADRO ESTÁTICO (ESCENA 2) --- */
+
 .message {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    /* Fondo blanco semitransparente (Efecto Vidrio) */
+    background: rgba(255, 255, 255, 0.90);
+    backdrop-filter: blur(5px); /* Desenfoca lo que hay detrás */
+    
+    padding: 30px 20px;
+    border-radius: 20px;
+    
+    /* Borde sutil y sombra elegante */
+    border: 2px solid rgba(255, 255, 255, 1);
+    box-shadow: 0 10px 30px rgba(255, 87, 87, 0.3);
+    
     position: relative;
     z-index: 10;
-    margin-top: 20vh;
+    margin-top: 15vh; /* Ajuste de altura */
+    max-width: 85%; /* Para que no toque los bordes en móvil */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* El Título ("Para: Mi negra hermosa...") */
+.message h1 {
+    font-family: 'Dancing Script', cursive; /* Letra cursiva bonita */
+    font-size: 2.2em;
+    color: #d62828; /* Rojo oscuro romántico */
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0px rgba(255, 200, 200, 0.5); /* Sombra suave */
+    line-height: 1.2;
+}
+
+/* El Texto ("Desde el primer día...") */
+.message p {
+    font-family: 'Poppins', sans-serif; /* Letra moderna fácil de leer */
+    font-size: 1em;
+    color: #444; /* Gris oscuro (se lee mejor que el negro puro) */
+    line-height: 1.6; /* Espaciado para que respire */
+    font-weight: 400;
 }
 
 .bubble {
@@ -607,4 +639,184 @@ body {
         padding: 5px 10px;
         opacity: 0.8; /* Un poco más transparentes */
     }
+    /* --- ESTILOS DE LA CARTA FINAL --- */
+
+/* Contenedor general de esta sección */
+#secuencia-correo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Un fondo blanco semitransparente para que resalte la carta sobre el fondo rosa */
+    background-color: #fff0f3; 
+    z-index: 3000; /* Por encima de todo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen {
+    display: none;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+}
+
+/* Esta clase hace que se vea la pantalla actual */
+.screen.active-mail {
+    display: block;
+}
+
+.screen h2 {
+    font-family: "Poppins", sans-serif;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.main-img {
+    width: 280px;
+    height: auto;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.main-img:hover {
+    transform: scale(1.05);
+}
+
+.card {
+    background: repeating-linear-gradient(
+        white,
+        white 28px,
+        #e3e3e3 29px
+    );
+    border-radius: 5px;
+    padding: 30px 40px;
+    border: 1px solid #ddd;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+/* Efecto de hoja de papel */
+.card::before {
+    content: '';
+    position: absolute;
+    left: 40px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #ff9999; /* Línea roja del margen */
+    opacity: 0.5;
+}
+
+.card h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2em;
+    text-align: left;
+    margin-bottom: 15px;
+    color: #444;
+    padding-left: 20px;
+}
+
+.card p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4em;
+    line-height: 29px; /* Alineado con las líneas del fondo */
+    text-align: left;
+    color: #444;
+    margin: 0;
+    padding-left: 20px;
+}
+
+.return-btn {
+    margin-top: 25px;
+    padding: 10px 25px;
+    font-size: 1em;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: #ff4f81;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    box-shadow: 0 4px 10px rgba(255, 79, 129, 0.4);
+}
+
+.return-btn:hover {
+    background-color: #ff2a66;
+}
+/* --- ESTILO DEL BOTÓN FINAL --- */
+#btn-sorpresa-final {
+    background: linear-gradient(45deg, #ff5757, #ff3333); /* Degradado rojo pasión */
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.3em; /* Texto grande */
+    font-family: 'Poppins', sans-serif; /* O la fuente que uses */
+    font-weight: bold;
+    border-radius: 50px; /* Bordes redondos (Pill shape) */
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(255, 87, 87, 0.5); /* Sombra resplandeciente */
+    transition: all 0.3s ease;
+    
+    /* Animación de latido */
+    animation: latido 2s infinite;
+}
+
+/* Efecto al pasar el mouse */
+#btn-sorpresa-final:hover {
+    transform: translateY(-3px) scale(1.05); /* Se levanta un poco */
+    box-shadow: 0 15px 30px rgba(255, 87, 87, 0.7);
+}
+
+/* Animación Keyframes (El latido) */
+@keyframes latido {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 87, 87, 0.6); }
+    100% { transform: scale(1); }
+}
+/* --- AJUSTE DE LA CARTA PARA MÓVILES --- */
+@media screen and (max-width: 600px) {
+    .card {
+        width: 90%;          /* Que ocupe casi todo el ancho */
+        padding: 20px 15px;  /* Reducimos el "relleno" interno */
+        padding-left: 40px;  /* Espacio extra a la izquierda para la línea roja */
+        
+        /* Habilitar scroll SI el texto es muy largo */
+        max-height: 70vh;    /* Que no ocupe más del 70% de la pantalla */
+        overflow-y: auto;    /* Si se pasa, aparece barrita para bajar */
+    }
+
+    /* Ajustar la línea roja del margen */
+    .card::before {
+        left: 25px; /* La movemos un poco más a la izquierda */
+    }
+
+    /* Ajustar el título */
+    .card h3 {
+        font-size: 1.5em; /* Un poco más pequeño */
+        padding-left: 0;
+        margin-top: 0;
+    }
+
+    /* Ajustar el texto de la carta */
+    .card p {
+        font-size: 14px;      /* Letra más pequeña para que quepa bien */
+        line-height: 29px;    /* ¡IMPORTANTE! No cambiar esto para que coincida con los renglones */
+        padding-left: 5px;    /* Pegadito al margen rojo pero sin tocarlo */
+        text-align: left;     /* Alineado a la izquierda se lee mejor en móvil */
+    }
+    
+    /* Ajustar el botón de volver */
+    .return-btn {
+        width: 100%;       /* Botón ancho fácil de tocar */
+        margin-top: 15px;
+    }
+}
 }

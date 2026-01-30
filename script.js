@@ -138,8 +138,28 @@ $(document).ready(function() {
         }
     });
 
-    // Botón volver (opcional)
-    $("#btn-volver").click(function() {
-        location.reload();
+    // --- LÓGICA DE TRANSICIÓN A LA SORPRESA FINAL ---
+
+    // 1. Al hacer clic en el botón de la Escena 3
+    $("#btn-sorpresa-final").click(function() {
+        // Ocultamos la línea de tiempo suavemente
+        $("#escena-3").fadeOut(500, function() {
+            // Mostramos el contenedor de la secuencia de correo
+            $("#secuencia-correo").fadeIn();
+            // Activamos la primera pantalla
+            $("#screen1").addClass("active-mail");
+        });
     });
+
+    // 2. Función para navegar entre las pantallas del correo
+    // (La hacemos global para que el HTML 'onclick' pueda encontrarla)
+    window.nextScreen = function(num) {
+        // Ocultamos la actual
+        $(".screen").removeClass("active-mail");
+        
+        // Mostramos la siguiente con una pequeña pausa para efecto
+        setTimeout(function() {
+            $("#screen" + num).addClass("active-mail");
+        }, 100);
+    };
 });
