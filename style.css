@@ -818,5 +818,130 @@ body {
         width: 100%;       /* Botón ancho fácil de tocar */
         margin-top: 15px;
     }
+  /* --- ESTILOS PARA ESCRITORIO (PANTALLAS GRANDES) --- */
+/* Esto aplicará solo cuando la pantalla sea más ancha que un celular */
+@media screen and (min-width: 601px) {
+
+    /* Centrar el contenedor principal del correo */
+    #secuencia-correo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh; /* Ocupa toda la altura de la pantalla */
+    }
+
+    /* Convertir cada pantalla (del 1 al 4) en una tarjeta elegante */
+    /* Usamos :not(#screen5) para no afectar a la carta final que ya tiene su estilo */
+    .screen:not(#screen5) {
+        background: #ffffff; /* Fondo blanco para la tarjeta */
+        padding: 40px 60px;  /* Espacio interno generoso */
+        border-radius: 20px; /* Bordes redondeados suaves */
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1); /* Sombra suave para dar profundidad */
+        text-align: center;  /* Centrar texto e imágenes */
+        
+        /* Limitar el ancho para que no se estire demasiado */
+        width: auto;
+        max-width: 500px; 
+        
+        /* Pequeña animación al aparecer */
+        animation: aparecerSuave 0.8s ease-out;
+    }
+
+    /* Títulos más bonitos y grandes en PC */
+    .screen h2 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2em;
+        color: #ff5757; /* Un toque del color principal */
+        margin-bottom: 30px;
+    }
+
+    /* Imágenes (GIFs) con un tamaño controlado y efecto hover */
+    .main-img {
+        width: 100%;       /* Que ocupe el ancho disponible de la tarjeta */
+        max-width: 300px;  /* Pero que no pase de 300px */
+        height: auto;      /* Mantener proporciones */
+        cursor: pointer;
+        transition: transform 0.3s ease; /* Suavizar el efecto de zoom */
+    }
+
+    /* Efecto al pasar el mouse por la imagen */
+    .main-img:hover {
+        transform: scale(1.05); /* Un ligero zoom para invitar al clic */
+    }
+}
+
+/* Animación de entrada para las tarjetas */
+@keyframes aparecerSuave {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Empieza un poco más abajo y transparente */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Termina en su lugar y visible */
+    }
+  }
+}
+/* --- ESTILOS DEL CONTADOR DE AMOR --- */
+#contador-amor {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#contador-amor h4 {
+    font-family: 'Poppins', sans-serif;
+    color: #ff5757;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.reloj-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espacio entre las cajitas */
+    flex-wrap: wrap; /* Para que se acomode en celulares pequeños */
+}
+
+.caja-tiempo {
+    background-color: #fff0f3; /* Fondo rosa muy suave */
+    border: 1px solid #ffccd5;
+    border-radius: 10px;
+    padding: 10px;
+    min-width: 50px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.caja-tiempo span {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #d62828; /* Rojo intenso para los números */
+    font-family: 'Poppins', sans-serif;
+}
+
+.caja-tiempo p {
+    margin: 0 !important; /* Quitamos el margen por defecto de la carta */
+    font-size: 0.8em !important;
+    color: #888 !important;
+    font-family: 'Poppins', sans-serif !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-left: 0 !important; /* Quitamos el padding de la carta */
+}
+
+/* Ajuste para móviles muy pequeños */
+@media screen and (max-width: 400px) {
+    .reloj-container {
+        gap: 5px;
+    }
+    .caja-tiempo {
+        padding: 5px;
+        min-width: 40px;
+    }
+    .caja-tiempo span {
+        font-size: 1.2em;
+    }
 }
 }
